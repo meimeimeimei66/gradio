@@ -887,7 +887,6 @@ class Slider(
             "interactive": interactive,
             "visible": visible,
             "value": value,
-            "interactive": interactive,
             "__type__": "update",
         }
 
@@ -1019,7 +1018,6 @@ class Checkbox(
             "interactive": interactive,
             "visible": visible,
             "value": value,
-            "interactive": interactive,
             "__type__": "update",
         }
 
@@ -1140,7 +1138,6 @@ class CheckboxGroup(
             "interactive": interactive,
             "visible": visible,
             "value": value,
-            "interactive": interactive,
             "__type__": "update",
         }
 
@@ -1322,7 +1319,6 @@ class Radio(
             "interactive": interactive,
             "visible": visible,
             "value": value,
-            "interactive": interactive,
             "__type__": "update",
         }
 
@@ -1511,7 +1507,6 @@ class Dropdown(
             "choices": choices,
             "label": label,
             "show_label": show_label,
-            "interactive": interactive,
             "visible": visible,
             "value": value,
             "interactive": interactive,
@@ -1707,7 +1702,6 @@ class Image(
             "visible": visible,
             "value": value,
             "brush_radius": brush_radius,
-            "interactive": interactive,
             "__type__": "update",
         }
 
@@ -1911,36 +1905,9 @@ class Image(
         )
         return self
 
-    def stream(
-        self,
-        fn: Callable,
-        inputs: List[Component],
-        outputs: List[Component],
-        _js: str | None = None,
-        api_name: str | None = None,
-        preprocess: bool = True,
-        postprocess: bool = True,
-    ):
-        """
-        This event is triggered when the user streams the component (e.g. a live webcam
-        component)
-        Parameters:
-            fn: Callable function
-            inputs: List of inputs
-            outputs: List of outputs
-        """
-        # js: Optional frontend js method to run before running 'fn'. Input arguments for js method are values of 'inputs' and 'outputs', return should be a list of values for output components.
+    def check_streamable(self):
         if self.source != "webcam":
             raise ValueError("Image streaming only available if source is 'webcam'.")
-        super().stream(
-            fn,
-            inputs,
-            outputs,
-            _js=_js,
-            api_name=api_name,
-            preprocess=preprocess,
-            postprocess=postprocess,
-        )
 
     def as_example(self, input_data: str | None) -> str:
         if input_data is None:
@@ -2054,7 +2021,6 @@ class Video(
             "interactive": interactive,
             "visible": visible,
             "value": value,
-            "interactive": interactive,
             "__type__": "update",
         }
 
@@ -2274,7 +2240,6 @@ class Audio(
             "interactive": interactive,
             "visible": visible,
             "value": value,
-            "interactive": interactive,
             "__type__": "update",
         }
 
@@ -2427,38 +2392,11 @@ class Audio(
             file_path = self.make_temp_copy_if_needed(y)
         return {"name": file_path, "data": None, "is_file": True}
 
-    def stream(
-        self,
-        fn: Callable,
-        inputs: List[Component],
-        outputs: List[Component],
-        _js: str | None = None,
-        api_name: str | None = None,
-        preprocess: bool = True,
-        postprocess: bool = True,
-    ):
-        """
-        This event is triggered when the user streams the component (e.g. a live webcam
-        component)
-        Parameters:
-            fn: Callable function
-            inputs: List of inputs
-            outputs: List of outputs
-        """
-        #             _js: Optional frontend js method to run before running 'fn'. Input arguments for js method are values of 'inputs' and 'outputs', return should be a list of values for output components.
+    def check_streamable(self):
         if self.source != "microphone":
             raise ValueError(
                 "Audio streaming only available if source is 'microphone'."
             )
-        super().stream(
-            fn,
-            inputs,
-            outputs,
-            _js=_js,
-            api_name=api_name,
-            preprocess=preprocess,
-            postprocess=postprocess,
-        )
 
     def style(
         self,
@@ -2591,7 +2529,6 @@ class File(
             "interactive": interactive,
             "visible": visible,
             "value": value,
-            "interactive": interactive,
             "__type__": "update",
         }
 
@@ -2856,7 +2793,6 @@ class Dataframe(Changeable, Selectable, IOComponent, JSONSerializable):
             "interactive": interactive,
             "visible": visible,
             "value": value,
-            "interactive": interactive,
             "__type__": "update",
         }
 
@@ -3073,7 +3009,6 @@ class Timeseries(Changeable, IOComponent, JSONSerializable):
             "interactive": interactive,
             "visible": visible,
             "value": value,
-            "interactive": interactive,
             "__type__": "update",
         }
 
@@ -3331,7 +3266,6 @@ class UploadButton(Clickable, Uploadable, IOComponent, FileSerializable):
             "interactive": interactive,
             "visible": visible,
             "value": value,
-            "interactive": interactive,
             "__type__": "update",
         }
 

@@ -187,6 +187,7 @@ def launched_telemetry(blocks: gradio.Blocks, data: Dict[str, Any]) -> None:
             )
         except Exception:
             pass
+
     threading.Thread(target=launched_telemtry_thread, args=(data,)).start()
 
 
@@ -207,8 +208,8 @@ def integration_analytics(data: Dict[str, Any]) -> None:
 def error_analytics(message: str) -> None:
     """
     Send error analytics if there is network
-    :param ip_address: IP address where error occurred
-    :param message: Details about error
+    Parameters:
+        message: Details about error
     """
     data = {"ip_address": get_local_ip_address(), "error": message}
 
